@@ -1,8 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+	const history = useNavigate();
+
+	
+
 	const submitHandler = (e) => {
 		e.preventDefault();
 		const email = e.target.email.value;
@@ -30,7 +35,9 @@ const Login = () => {
 			.post('http://challenge-react.alkemy.org', { email, password })
 			.then((res) => {
 				swAlert(<h2>Success</h2>);
-				console.log(res.data);
+				const token = res.data.token;
+				localStorage.setItem('token', token);
+				history('/list');
 			});
 	};
 
