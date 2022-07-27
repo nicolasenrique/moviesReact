@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 const Login = () => {
 	const submitHandler = (e) => {
@@ -7,27 +8,29 @@ const Login = () => {
 		const password = e.target.password.value;
 
 		const regexEmail =
-			/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-		
 		if (email === '' || password === '') {
 			alert('Please fill in all fields');
-            return;
+			return;
 		}
 
 		if (email !== '' && !regexEmail.test(email)) {
 			alert('Please enter a valid email');
-            return;
+			return;
 		}
 
-        if (email !== 'challenge@alkemy.org' || password !== 'react') {
-            alert('Invalid email or password');
-            return;
-        }
-        console.log('Ok to log')
+		if (email !== 'challenge@alkemy.org' || password !== 'react') {
+			alert('Invalid email or password');
+			return;
+		}
+		console.log('Ok to log');
+		axios
+			.post('http://challenge-react.alkemy.org', { email, password })
+			.then((res) => {
+				console.log(res.data);
+			});
 	};
-
-
 
 	return (
 		<div>
