@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import swAlert from '@sweetalert/with-react';
 
 const Login = () => {
 	const submitHandler = (e) => {
@@ -11,23 +12,24 @@ const Login = () => {
 			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 		if (email === '' || password === '') {
-			alert('Please fill in all fields');
+			swAlert(<h2>Please fill in all fields</h2>);
 			return;
 		}
 
 		if (email !== '' && !regexEmail.test(email)) {
-			alert('Please enter a valid email');
+			swAlert(<h2>Please enter a valid email</h2>);
 			return;
 		}
 
 		if (email !== 'challenge@alkemy.org' || password !== 'react') {
-			alert('Invalid email or password');
+			swAlert(<h2>Invalid email or password</h2>);
 			return;
 		}
 		console.log('Ok to log');
 		axios
 			.post('http://challenge-react.alkemy.org', { email, password })
 			.then((res) => {
+				swAlert(<h2>Success</h2>);
 				console.log(res.data);
 			});
 	};
