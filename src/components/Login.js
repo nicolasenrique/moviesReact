@@ -1,12 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const Login = () => {
 	const history = useNavigate();
-
-	
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -41,24 +39,37 @@ const Login = () => {
 			});
 	};
 
+	let token = localStorage.getItem('token');
+
 	return (
 		<div>
-			<h2>Login Form</h2>
-			<form onSubmit={submitHandler}>
-				<label>
-					<span>Email:</span>
-					<br />
-					<input type="test" name="email"></input>
-				</label>
-				<br />
-				<label>
-					<span>Password:</span>
-					<br />
-					<input type="password" name="password"></input>
-				</label>
-				<br />
-				<button type="submit">Login</button>
-			</form>
+		{ token && <Navigate replace to="/list" /> }
+			<div className="row">
+				<div className="col-6 offset-3">
+					<h2>Login Form</h2>
+					<form onSubmit={submitHandler}>
+						<label className="form-label d-block mt-2">
+							<span>Email:</span>
+							<br />
+							<input type="test" name="email" className="form-control"></input>
+						</label>
+						<br />
+						<label className="form-label d-block mt-2">
+							<span>Password:</span>
+							<br />
+							<input
+								type="password"
+								name="password"
+								className="form-control"
+							></input>
+						</label>
+						<br />
+						<button type="submit" className="btn btn-success mt-2">
+							Login
+						</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	);
 };
