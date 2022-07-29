@@ -34,12 +34,12 @@ const Login = () => {
 			.then((res) => {
 				swAlert(<h2>Success</h2>);
 				const token = res.data.token;
-				localStorage.setItem('token', token);
+				sessionStorage.setItem('token', token);
 				history('/list');
 			});
 	};
 
-	let token = localStorage.getItem('token');
+	let token = sessionStorage.getItem('token');
 
 	return (
 		<div>
