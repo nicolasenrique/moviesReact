@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import swAlert from 'sweetalert';
+import swAlert from '@sweetalert/with-react';
 
 const List = () => {
 	let token = sessionStorage.getItem('token');
@@ -45,7 +45,7 @@ const List = () => {
 									<p className="card-text">
 										{oneMovie.overview.substring(0, 80)}...
 									</p>
-									<Link to={`detail?movieId=${oneMovie.id}`} className="btn btn-primary">
+									<Link to={`/detail?movieId=${oneMovie.id}`} className="btn btn-primary">
 										View detail
 									</Link>
 								</div>
