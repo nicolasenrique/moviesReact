@@ -51,7 +51,7 @@ const Login = () => {
 						<label className="form-label d-block mt-2">
 							<span>Email:</span>
 							<br />
-							<input type="test" name="email" className="form-control"></input>
+							<input type="text" name="email" className="form-control"></input>
 						</label>
 						<br />
 						<label className="form-label d-block mt-2">

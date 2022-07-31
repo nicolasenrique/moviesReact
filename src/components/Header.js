@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Components
+import Search from './Search';
+
 
 const Header = () => {
 	return (
 		<header>
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div className="container">
+				<Link to="/" className="navbar-brand">Alkeflix</Link>
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className= "navbar-nav mr-auto">
 					<li className = "nav-item">
@@ -18,6 +23,8 @@ const Header = () => {
 						<Link to="/contact" className = "nav-link">Contact</Link>
 					</li>
 				</ul>
+			</div>
+			<Search/>
 			</div>
 			</nav>
 		</header>
