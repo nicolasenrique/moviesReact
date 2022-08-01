@@ -2,18 +2,13 @@ import React from 'react';
 
 const Footer = () => {
 	return (
-		<footer>
-			<nav>
-				<ul>
-					<li>
-						<a href="http://instagram.com" rel="noopener noreferrer">
-							IG
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<p>Copyright Alkemy Challenge</p>
-		</footer>
+		<div className="d-flex flex-column min-vh-100">
+			<footer className=" mt-auto py-3 bg-dark min">
+				<div className="container">
+					<span className="text-light">Alkemy challenge</span>
+				</div>
+			</footer>
+		</div>
 	);
 };
 

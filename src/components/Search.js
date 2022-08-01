@@ -1,18 +1,22 @@
 import React from 'react';
 import swAlert from '@sweetalert/with-react';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
+	const history = useNavigate();
+
 	const submitHandler = (e) => {
 		e.preventDefault();
 		const search = e.currentTarget.keyword.value.trim();
 		if (search.length === 0) {
 			swAlert(<h2>Please enter a search term</h2>);
-			return;
+		} else if (search.length < 4) {
+			swAlert(<h2>Please enter a search term of at least 4 characters</h2>);
+		} else {
+			e.currentTarget.keyword.value = '';
+			history(`/results?keyword=${search}`);
+		
 		}
-    else if (search.length < 4) {
-      swAlert(<h2>Please enter a search term of at least 4 characters</h2>);
-      return;
-    }
 	};
 	return (
 		<form className="d-flex align-items-center" onSubmit={submitHandler}>
