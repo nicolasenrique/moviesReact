@@ -19,18 +19,17 @@ const Results = () => {
 				// if (apiData.results.length > 0) {
 				// 	swAlert(<h2>Found {apiData.results.length} results</h2>);
 				// 	return
-				// } 
-			// else if (apiData.results.length === 0) {
-			// 	// 	swAlert(<h2>No results found</h2>);
-			// 	// 	return
-			// 	// }
+				// }
+				// else if (apiData.results.length === 0) {
+				// 	// 	swAlert(<h2>No results found</h2>);
+				// 	// 	return
+				// 	// }
 				setMoviesResults(apiData.results);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	});
-
 
 	return (
 		<>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
 
-const List = () => {
+const List = (props) => {
 	let token = sessionStorage.getItem('token');
 
 	const [moviesList, setMoviesList] = useState([]);
@@ -18,7 +18,7 @@ const List = () => {
 				const apiData = response.data;
 				setMoviesList(apiData.results);
 			})
-			.catch(error => {
+			.catch((error) => {
 				swAlert(<h2>Error happened, try again later</h2>);
 			});
 	}, [setMoviesList]);
@@ -31,13 +31,23 @@ const List = () => {
 			<div className="row">
 				{moviesList.map((oneMovie, idx) => {
 					return (
-						<div className="col-sm-12 col-lg-3 d-flex align-items-stretch" key={idx}>
+						<div
+							className="col-sm-12 col-lg-3 d-flex align-items-stretch"
+							key={idx}
+						>
 							<div className="card my-4">
 								<img
 									src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
 									className="card-img-top"
 									alt="..."
 								/>
+								<button
+									className="favourite-btn"
+									onClick={props.addOrRemoveFavourite}
+									data-movie-id={oneMovie.id}
+								>
+									🖤
+								</button>
 								<div className="card-body">
 									<h5 className="card-title">
 										{oneMovie.title.substring(0, 20)}...
@@ -45,7 +55,10 @@ const List = () => {
 									<p className="card-text">
 										{oneMovie.overview.substring(0, 80)}...
 									</p>
-									<Link to={`/detail?movieId=${oneMovie.id}`} className="btn btn-primary">
+									<Link
+										to={`/detail?movieId=${oneMovie.id}`}
+										className="btn btn-primary"
+									>
 										View detail
 									</Link>
 								</div>
