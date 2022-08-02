@@ -5,9 +5,7 @@ Password: react
 
 ## Starting the App
 
-Access the app deploy here: https://movies-react-theta.vercel.app/
-
-Or in the project directory, you can run:
+In the project directory, you can run:
 
 ### `npm start`
 
