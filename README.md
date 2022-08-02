@@ -1,6 +1,13 @@
+### User for testing
+
+User: challenge@alkemy.org\
+Password: react
+
 ## Starting the App
 
-In the project directory, you can run:
+Access the app deploy here: https://movies-react-theta.vercel.app/
+
+Or in the project directory, you can run:
 
 ### `npm start`
 
@@ -10,8 +17,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### User for testing
 
-User: challenge@alkemy.org\
-Password: react
 
