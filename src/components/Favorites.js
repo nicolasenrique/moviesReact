@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState, useEffect, Navigate } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link , Navigate } from 'react-router-dom';
 
 const Favorites = (props) => {
 	const [favorites, setFavorites] = useState([]);
