@@ -30,7 +30,7 @@ const Login = () => {
 		}
 		console.log('Ok to log');
 		axios
-			.post('https://challenge-react.alkemy.org', { email, password })
+			.post('http://challenge-react.alkemy.org', { email, password })
 			.then((res) => {
 				swAlert(<h2>Success</h2>);
 				const token = res.data.token;
