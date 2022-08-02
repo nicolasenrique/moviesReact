@@ -1,23 +1,21 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Navigate } from 'react';
+import { Link } from 'react-router-dom';
 
-const Favorites = () => {
+const Favorites = (props) => {
 	const [favorites, setFavorites] = useState([]);
 
-	useEffect(() => {
-		const favsInLocal = localStorage.getItem('favs');
-		console.log(favsInLocal);
-		if (favsInLocal !== null) {
-			setFavorites(JSON.parse(favsInLocal));
-			console.log(favsInLocal);
-		}
-	}, []);
+	let token = sessionStorage.getItem('token');
 
 	return (
 		<>
+			{!token && <Navigate replace to="/" />}
 			<div>Favorites</div>
 			<div className="row">
-				{favorites.map((oneMovie, idx) => {
+				{!props.favorites.length && (
+					<div className="col-12 text-danger">Nothing in favorites</div>
+				)}
+				{props.favorites.map((oneMovie, idx) => {
 					return (
 						<div
 							className="col-sm-12 col-lg-3 d-flex align-items-stretch"
@@ -29,13 +27,13 @@ const Favorites = () => {
 									className="card-img-top"
 									alt="..."
 								/>
-								{/* <button
+								<button
 									className="favourite-btn"
 									onClick={props.addOrRemoveFavourite}
 									data-movie-id={oneMovie.id}
 								>
 									🖤
-								</button> */}
+								</button>
 								<div className="card-body">
 									<h5 className="card-title">
 										{oneMovie.title.substring(0, 20)}...
@@ -43,12 +41,12 @@ const Favorites = () => {
 									<p className="card-text">
 										{oneMovie.overview.substring(0, 80)}...
 									</p>
-									{/* <Link
+									<Link
 										to={`/detail?movieId=${oneMovie.id}`}
 										className="btn btn-primary"
 									>
 										View detail
-									</Link> */}
+									</Link>
 								</div>
 							</div>
 						</div>

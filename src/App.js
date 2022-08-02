@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 //Components
 
 import Login from './components/Login';
@@ -16,17 +18,32 @@ import './css/bootstrap.min.css';
 import './css/app.css';
 
 function App() {
-	const favMovies = localStorage.getItem('favs');
+	const [favorites, setFavorites] = useState([]);
 
-	let tempMoviesInFavs;
+	useEffect(() => {
+		const favsInLocal = localStorage.getItem('favs');
 
-	if (favMovies) {
-		tempMoviesInFavs = JSON.parse(favMovies);
-	} else {
-		tempMoviesInFavs = [];
-	}
+		
+
+		if (favsInLocal !== null) {
+			let favsArray = JSON.parse(favsInLocal);
+			setFavorites(favsArray);
+		}
+	}, []);
 
 	const addOrRemoveFavourite = (e) => {
+
+		const favMovies = localStorage.getItem('favs');
+		let tempMoviesInFavs
+
+		if (favMovies !== null) {
+			tempMoviesInFavs = JSON.parse(favMovies);
+		}
+		else {
+			tempMoviesInFavs = [];
+		}
+
+
 		const btn = e.currentTarget;
 		const parent = btn.parentElement;
 		const imgURL = parent.querySelector('img').src;
@@ -46,28 +63,34 @@ function App() {
 		if (!movieIsInArray) {
 			tempMoviesInFavs.push(movieData);
 			localStorage.setItem('favs', JSON.stringify(tempMoviesInFavs));
+			setFavorites(tempMoviesInFavs);
 			console.log('added');
 		} else {
-			tempMoviesInFavs = tempMoviesInFavs.filter((oneMovie) => {
+			let moviesLeft = tempMoviesInFavs.filter((oneMovie) => {
 				return oneMovie.id !== movieData.id;
 			});
-			localStorage.setItem('favs', JSON.stringify(tempMoviesInFavs));
+			localStorage.setItem('favs', JSON.stringify(moviesLeft));
+			setFavorites(moviesLeft);
 			console.log('removed');
 		}
 	};
 
 	return (
 		<>
-			<Header />
+			<Header favorites={favorites}/>
 			<div className="container mt-3">
 				<Routes>
 					<Route path="/" element={<Login />} />
 					<Route
 						path="/list"
-						element={<List addOrRemoveFavourite={addOrRemoveFavourite} />}/>
+						element={<List addOrRemoveFavourite={addOrRemoveFavourite} />}
+					/>
 					<Route path="/detail" element={<Detail />} />
 					<Route path="/results" element={<Results />} />
-					<Route path="/favorites" element={<Favorites />} />
+					<Route
+						path="/favorites"
+						element={<Favorites favorites={favorites} addOrRemoveFavourite={addOrRemoveFavourite}  />}
+					/>
 				</Routes>
 			</div>
 			<Footer />
